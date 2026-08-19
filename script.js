@@ -15,7 +15,7 @@ const HEROIS = [
     identidade: "Peter Parker",
     universo: "Marvel",
     cor: "#D6202B",
-    imagem: "",
+    imagem: "imagens/homem-aranha.jpg",
     resumo: "Um estudante comum que aprendeu do jeito mais duro o preço de não agir.",
     origem: "Peter Parker era um adolescente tímido e bom em ciências quando foi picado por uma aranha alterada em laboratório durante uma feira científica. Ganhou força, aderência e um sentido de perigo que avisa antes do golpe chegar. No começo usou tudo isso para ganhar dinheiro na televisão e ignorou um assalto que não era problema dele — até descobrir que o mesmo ladrão havia matado seu tio Ben. Desde então carrega a ideia de que quem pode agir e não age também responde pelo resultado.",
     poderes: ["Força ampliada", "Aderência", "Sentido aranha", "Teias mecânicas"],
@@ -29,7 +29,7 @@ const HEROIS = [
     identidade: "Tony Stark",
     universo: "Marvel",
     cor: "#E0A020",
-    imagem: "",
+    imagem: "imagens/homem-de-ferro.jpg",
     resumo: "Vendeu armas por anos, até levar um tiro do próprio catálogo.",
     origem: "Tony Stark herdou uma indústria bilionária de armamentos e vivia disso sem perguntar muito para onde iam as encomendas. Numa demonstração em zona de guerra foi ferido por estilhaços e sequestrado, obrigado a montar um míssil para os captores. Em vez disso, montou uma armadura: primeiro para manter o coração batendo, depois para sair de lá. Voltou como Homem de Ferro decidido a desmontar o estrago que ajudou a espalhar pelo mundo.",
     poderes: ["Armadura blindada", "Voo", "Raios repulsores", "Gênio em engenharia"],
@@ -129,7 +129,7 @@ const HEROIS = [
     identidade: "Kal-El / Clark Kent",
     universo: "DC",
     cor: "#1E6FD9",
-    imagem: "",
+    imagem: "imagens/superman.jpg",
     resumo: "O último filho de um planeta que ninguém conseguiu salvar.",
     origem: "Krypton estava condenado e o cientista Jor-El não conseguiu convencer ninguém a tempo. Colocou o filho recém-nascido numa nave e o lançou para a Terra pouco antes do planeta explodir. O bebê caiu no Kansas e foi criado por Jonathan e Martha Kent como Clark. Sob a luz de um sol amarelo, o corpo kryptoniano ganha força, voo e resistência — mas foi a criação numa fazenda do interior que definiu o que ele faria com isso.",
     poderes: ["Força e voo", "Visão de calor", "Superaudição", "Invulnerabilidade"],
@@ -171,7 +171,7 @@ const HEROIS = [
     identidade: "Barry Allen",
     universo: "DC",
     cor: "#D93A22",
-    imagem: "",
+    imagem: "imagens/flash.jpg",
     resumo: "O cara mais lento do laboratório virou o homem mais rápido vivo.",
     origem: "Barry Allen era perito forense da polícia de Central City e vivia atrasado para tudo. Uma noite, um raio atingiu a prateleira de produtos químicos ao lado da bancada dele e o banhou com a mistura. Em vez de matá-lo, o acidente o conectou à Força de Aceleração, o campo de energia que é a fonte da velocidade. Ele corre, pensa e cura mais rápido que qualquer pessoa — e a parte difícil virou justamente decidir onde chegar primeiro.",
     poderes: ["Supervelocidade", "Vibração molecular", "Regeneração acelerada", "Raciocínio veloz"],
@@ -345,16 +345,31 @@ const PATENTES = [
    ARTE DO CARD
    ========================================================= */
 
-function conteudoArte(heroi) {
-  if (heroi.imagem) {
-    return `<img src="${heroi.imagem}" alt="Ilustração de ${heroi.nome}">`;
-  }
+function selo(heroi) {
   return `<span class="chapas" aria-hidden="true">
             <span class="chapa--c">${heroi.iniciais}</span>
             <span class="chapa--m">${heroi.iniciais}</span>
             <span class="chapa--y">${heroi.iniciais}</span>
             <span class="chapa--k">${heroi.iniciais}</span>
           </span>`;
+}
+
+function conteudoArte(heroi) {
+  if (heroi.imagem) {
+    return `<img src="${heroi.imagem}" alt="Ilustração de ${heroi.nome}" data-heroi="${heroi.nome}">`;
+  }
+  return selo(heroi);
+}
+
+/* Se a imagem não carregar (arquivo ausente ou nome errado),
+   o card volta para o selo de tinta em vez de quebrar. */
+function ligarFallbackDeImagem(escopo) {
+  escopo.querySelectorAll("img[data-heroi]").forEach((img) => {
+    img.addEventListener("error", () => {
+      const heroi = HEROIS.find((h) => h.nome === img.dataset.heroi);
+      if (heroi) img.parentElement.innerHTML = selo(heroi);
+    }, { once: true });
+  });
 }
 
 function montarArte(heroi, classe) {
@@ -417,6 +432,8 @@ function renderizarGrade() {
     ? "1 herói no arquivo"
     : `${lista.length} heróis no arquivo`;
 
+  ligarFallbackDeImagem(grade);
+
   grade.querySelectorAll(".painel").forEach((painel) => {
     observador.observe(painel);
     painel.addEventListener("click", () => abrirFicha(painel.dataset.nome));
@@ -461,6 +478,7 @@ function abrirFicha(nome) {
   const arte = document.getElementById("fichaArte");
   arte.style.setProperty("--cor-heroi", heroi.cor);
   arte.innerHTML = conteudoArte(heroi);
+  ligarFallbackDeImagem(arte);
 
   document.getElementById("fichaUniverso").textContent  = `${heroi.universo} • ${heroi.equipe}`;
   document.getElementById("fichaNome").textContent      = heroi.nome;
