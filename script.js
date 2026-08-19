@@ -85,7 +85,7 @@ const HEROIS = [
     identidade: "T'Challa",
     universo: "Marvel",
     cor: "#6B3FA0",
-    imagem: "",
+    imagem: "imagens/pantera-negra.jpg",
     resumo: "Rei por herança, Pantera por prova.",
     origem: "T'Challa assumiu o trono de Wakanda depois da morte do pai, mas o título de Pantera Negra não vem só de sangue: é preciso vencer o desafio ritual e receber a erva em forma de coração, que amplia sentidos, força e reflexos. Governa a nação mais avançada do mundo, sentada sobre a maior reserva de vibranium do planeta, e passou a vida decidindo até onde Wakanda deve se abrir para fora. Protege o país como rei e o mundo como herói — nem sempre nessa ordem.",
     poderes: ["Sentidos ampliados", "Traje de vibranium", "Artes marciais", "Recursos de Wakanda"],
@@ -99,7 +99,7 @@ const HEROIS = [
     identidade: "Natasha Romanoff",
     universo: "Marvel",
     cor: "#8C1C2B",
-    imagem: "",
+    imagem: "imagens/viuva-negra.jpg",
     resumo: "Foi treinada para ser arma antes de poder escolher qualquer coisa.",
     origem: "Natasha Romanoff foi criada dentro da Sala Vermelha, um programa soviético que transformava crianças em espiãs e assassinas de elite. Recebeu treinamento militar, condicionamento e melhorias que retardam o envelhecimento. Enviada ao Ocidente em missão, acabou desertando e passou a trabalhar para o outro lado. Não tem superpoder nenhum, e é exatamente por isso que a ficha dela pesa: cada coisa que fez, fez por conta própria.",
     poderes: ["Espionagem", "Combate corpo a corpo", "Manipulação", "Bastões de choque"],
@@ -113,7 +113,7 @@ const HEROIS = [
     identidade: "Stephen Strange",
     universo: "Marvel",
     cor: "#B03030",
-    imagem: "",
+    imagem: "imagens/doutor-estranho.jpg",
     resumo: "Perdeu as mãos de cirurgião e teve que aprender outra coisa.",
     origem: "Stephen Strange era um neurocirurgião brilhante, rico e insuportável. Um acidente de carro destruiu os nervos das mãos dele e acabou com a carreira. Depois de gastar tudo atrás de uma cura, chegou ao Himalaia procurando o Ancião — que não curou as mãos, mas ofereceu treinamento nas artes místicas. Strange virou aprendiz por orgulho e ficou por convicção, assumindo o posto de Mago Supremo, responsável por segurar as ameaças que vêm de outras dimensões.",
     poderes: ["Magia", "Projeção astral", "Portais", "Manto da Levitação"],
@@ -157,7 +157,7 @@ const HEROIS = [
     identidade: "Diana de Themyscira",
     universo: "DC",
     cor: "#C8102E",
-    imagem: "",
+    imagem: "imagens/mulher-maravilha.jpg",
     resumo: "Saiu de uma ilha escondida para devolver um piloto e nunca mais voltou de vez.",
     origem: "Diana cresceu em Themyscira, ilha das amazonas, escondida do mundo dos homens e treinada como guerreira desde criança. Quando o piloto Steve Trevor caiu no mar perto da ilha e contou que havia uma guerra lá fora, Diana disputou o direito de ser a enviada das amazonas. Chegou ao mundo exterior carregando o Laço da Verdade, as manoplas e uma ideia que soava ingênua ali: que as pessoas merecem a chance de fazer melhor.",
     poderes: ["Força divina", "Laço da Verdade", "Manoplas indestrutíveis", "Combate amazona"],
@@ -185,7 +185,7 @@ const HEROIS = [
     identidade: "Arthur Curry",
     universo: "DC",
     cor: "#0F8F8F",
-    imagem: "",
+    imagem: "imagens/aquaman.jpg",
     resumo: "Filho de dois mundos que passaram a vida se ignorando.",
     origem: "Arthur Curry é filho de um faroleiro humano com uma rainha de Atlântida. Cresceu na superfície descobrindo aos poucos que respirava embaixo d'água, enxergava no escuro do fundo do mar e conseguia se comunicar com a vida marinha. A herança atlante o coloca como rei de um reino que desconfia da superfície, enquanto a superfície ri de um herói que 'fala com peixe'. Governar os dois lados sem trair nenhum é o trabalho de verdade dele.",
     poderes: ["Força anfíbia", "Telepatia marinha", "Natação em alta velocidade", "Tridente"],
@@ -213,7 +213,7 @@ const HEROIS = [
     identidade: "Victor Stone",
     universo: "DC",
     cor: "#8A8F98",
-    imagem: "",
+    imagem: "imagens/ciborgue.jpg",
     resumo: "O pai salvou a vida dele com a tecnologia que ele odiava.",
     origem: "Victor Stone era atleta e vivia brigando com o pai, um cientista que queria o filho no laboratório e não na quadra. Um acidente durante um experimento destruiu boa parte do corpo de Victor, e o pai o reconstruiu com próteses e sistemas experimentais para não perdê-lo. Victor acordou metade humano, metade máquina, sem ter escolhido nada disso. Levou tempo para parar de se ver como sobra do acidente e passar a se ver como alguém inteiro, só que diferente.",
     poderes: ["Corpo biônico", "Interface com sistemas", "Canhão sônico", "Força ampliada"],
@@ -227,7 +227,7 @@ const HEROIS = [
     identidade: "Billy Batson",
     universo: "DC",
     cor: "#E4B024",
-    imagem: "",
+    imagem: "imagens/shazam.jpg",
     resumo: "Uma criança de rua com o poder de seis figuras da mitologia.",
     origem: "Billy Batson era um garoto órfão vivendo por conta própria quando foi levado até um velho mago em uma câmara escondida. O mago procurava alguém de coração puro para herdar seu poder e escolheu Billy. Ao dizer a palavra mágica, um raio o transforma num adulto com dons emprestados de seis figuras lendárias: sabedoria, força, resistência, poder, coragem e velocidade. Por dentro continua sendo um garoto — o que às vezes é o problema e às vezes é exatamente a solução.",
     poderes: ["Força e voo", "Raio mágico", "Sabedoria de Salomão", "Invulnerabilidade"],
@@ -356,7 +356,8 @@ function selo(heroi) {
 
 function conteudoArte(heroi) {
   if (heroi.imagem) {
-    return `<img src="${heroi.imagem}" alt="Ilustração de ${heroi.nome}" data-heroi="${heroi.nome}">`;
+    return `<img src="${heroi.imagem}" alt="Ilustração de ${heroi.nome}"
+                 data-heroi="${heroi.nome}" loading="lazy" decoding="async">`;
   }
   return selo(heroi);
 }
