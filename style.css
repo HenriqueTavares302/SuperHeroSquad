@@ -325,6 +325,12 @@ img { max-width: 100%; display: block; }
 .filtro:hover { background: var(--amarelo); }
 .filtro.filtro--ativo { background: var(--tinta); color: var(--papel-alto); }
 
+/* cresce para ocupar o espaco livre ao lado dos filtros,
+   senao o texto do placeholder fica cortado */
+.busca {
+  flex: 1 1 280px;
+  max-width: 400px;
+}
 .busca input {
   font-family: var(--fonte-corpo);
   font-size: 1rem;
@@ -333,7 +339,8 @@ img { max-width: 100%; display: block; }
   border-radius: var(--raio);
   background: var(--papel-alto);
   color: var(--tinta);
-  min-width: 260px;
+  width: 100%;
+  min-width: 0;
 }
 .busca input::placeholder { color: var(--cinza); }
 
@@ -731,8 +738,7 @@ body.travado { overflow: hidden; }
   .ficha__painel { grid-template-columns: 1fr; }
   .ficha__arte { border-right: 0; border-bottom: 4px solid var(--tinta); min-height: 200px; }
   .onomatopeia { display: none; }
-  .busca input { min-width: 100%; }
-  .busca { width: 100%; }
+  .busca { flex: 1 1 100%; max-width: none; }
   .controles { flex-direction: column; align-items: stretch; }
 }
 
