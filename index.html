@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Hero Squad — origens de heróis Marvel e DC</title>
+  <meta name="description" content="Conheça a origem dos maiores heróis da Marvel e da DC e teste o que você sabe no quiz de recrutamento.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow+Condensed:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="pular-link" href="#herois">Pular para os heróis</a>
+
+  <!-- ============ TOPO ============ -->
+  <header class="topo">
+    <div class="topo__interno">
+      <a class="marca" href="#capa">
+        <span class="marca__linha1">Super Hero</span>
+        <span class="marca__linha2">Squad</span>
+      </a>
+      <nav class="menu" aria-label="Navegação principal">
+        <a href="#herois">Heróis</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ CAPA ============ -->
+    <section class="capa" id="capa">
+      <div class="capa__reticula" aria-hidden="true"></div>
+
+      <div class="capa__selo" aria-hidden="true">
+        <span>Nº 01</span>
+        <strong>Grátis</strong>
+      </div>
+
+      <div class="capa__conteudo">
+        <p class="etiqueta">Edição de estreia • Marvel &amp; DC</p>
+
+        <h1 class="capa__titulo">
+          <span class="tinta-ciano">Super</span>
+          <span class="tinta-magenta">Hero</span>
+          <span class="tinta-ink">Squad</span>
+        </h1>
+
+        <p class="capa__texto">
+          Antes da capa, da armadura e do símbolo, cada herói foi só uma pessoa em um dia
+          muito ruim. Aqui estão <strong id="contadorHerois">16</strong> dessas histórias —
+          e um teste no final pra ver quanto você realmente sabe.
+        </p>
+
+        <div class="capa__acoes">
+          <a class="botao botao--primario" href="#herois">Ver os heróis</a>
+          <a class="botao botao--vazado" href="#quiz">Fazer o quiz</a>
+        </div>
+
+        <div class="onomatopeia" aria-hidden="true">
+          <span>POW!</span><span>KRAK!</span><span>ZAP!</span><span>BAM!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HERÓIS ============ -->
+    <section class="secao" id="herois">
+      <div class="secao__cabecalho">
+        <p class="etiqueta">Arquivo de campo</p>
+        <h2 class="titulo-secao">O esquadrão</h2>
+        <p class="secao__texto">
+          Clique em qualquer painel para abrir a ficha completa com origem, poderes e primeira aparição.
+        </p>
+      </div>
+
+      <div class="controles">
+        <div class="filtros" role="group" aria-label="Filtrar por universo">
+          <button class="filtro filtro--ativo" data-universo="todos" type="button">Todos</button>
+          <button class="filtro" data-universo="Marvel" type="button">Marvel</button>
+          <button class="filtro" data-universo="DC" type="button">DC</button>
+        </div>
+
+        <div class="busca">
+          <label class="visualmente-oculto" for="campoBusca">Buscar herói</label>
+          <input id="campoBusca" type="search" placeholder="Buscar por nome ou identidade..." autocomplete="off">
+        </div>
+      </div>
+
+      <p class="resultado-contagem" id="resultadoContagem" role="status"></p>
+
+      <div class="grade" id="gradeHerois"></div>
+
+      <p class="vazio" id="mensagemVazia" hidden>
+        Nenhum herói com esse nome no arquivo. Tente outro termo ou volte para <button class="link-botao" type="button" data-limpar>todos os heróis</button>.
+      </p>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="secao secao--quiz" id="quiz">
+      <div class="secao__cabecalho">
+        <p class="etiqueta">Formulário S.H.S. — 01</p>
+        <h2 class="titulo-secao">Teste de recrutamento</h2>
+        <p class="secao__texto">
+          Dez perguntas sobre as origens que você acabou de ler. Sem consulta — a gente confia em você.
+        </p>
+      </div>
+
+      <div class="quiz" id="quiz-app">
+
+        <!-- Tela inicial -->
+        <div class="quiz__tela" id="quizInicio">
+          <p class="quiz__intro">
+            Você responde uma pergunta por vez e recebe o retorno na hora.
+            No fim sai a sua patente.
+          </p>
+          <button class="botao botao--primario" type="button" id="btnComecar">Começar o teste</button>
+        </div>
+
+        <!-- Tela de perguntas -->
+        <div class="quiz__tela" id="quizJogo" hidden>
+          <div class="quiz__topo">
+            <span class="quiz__contador" id="quizContador">Pergunta 1 de 10</span>
+            <span class="quiz__placar" id="quizPlacar">0 acertos</span>
+          </div>
+
+          <div class="medidor" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Progresso do teste">
+            <div class="medidor__barra" id="medidorBarra"></div>
+          </div>
+
+          <h3 class="quiz__pergunta" id="quizPergunta"></h3>
+
+          <div class="quiz__alternativas" id="quizAlternativas"></div>
+
+          <p class="quiz__retorno" id="quizRetorno" role="status" hidden></p>
+
+          <button class="botao botao--primario" type="button" id="btnProxima" hidden>Próxima</button>
+        </div>
+
+        <!-- Tela de resultado -->
+        <div class="quiz__tela" id="quizFim" hidden>
+          <p class="etiqueta">Resultado</p>
+          <p class="quiz__nota"><span id="quizNota">0</span><small>/10</small></p>
+          <h3 class="quiz__patente" id="quizPatente"></h3>
+          <p class="quiz__comentario" id="quizComentario"></p>
+          <div class="capa__acoes">
+            <button class="botao botao--primario" type="button" id="btnRefazer">Refazer o teste</button>
+            <a class="botao botao--vazado" href="#herois">Revisar as origens</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SOBRE ============ -->
+    <section class="secao secao--sobre" id="sobre">
+      <div class="sobre">
+        <h2 class="titulo-secao">Sobre este arquivo</h2>
+        <p>
+          Super Hero Squad é um projeto de estudo feito com HTML, CSS e JavaScript puros —
+          sem framework, sem build, sem dependência. As fichas resumem a origem clássica de cada
+          personagem publicada pela Marvel e pela DC.
+        </p>
+        <p>
+          A arte dos painéis é gerada em CSS: cada selo é impresso em três chapas de tinta
+          (ciano, magenta e amarelo) fora de registro, do jeito que saía em gibi antigo.
+          Passe o mouse e as chapas se alinham.
+        </p>
+        <p class="aviso">
+          Marvel e DC são marcas de seus respectivos detentores. Este é um projeto acadêmico,
+          sem fins comerciais e sem vínculo com as editoras.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p class="rodape__marca">Super Hero Squad</p>
+    <p>Feito com HTML, CSS e JavaScript • Projeto de estudo</p>
+  </footer>
+
+  <!-- ============ FICHA (MODAL) ============ -->
+  <div class="ficha" id="ficha" hidden>
+    <div class="ficha__fundo" data-fechar></div>
+
+    <div class="ficha__painel" role="dialog" aria-modal="true" aria-labelledby="fichaNome">
+      <button class="ficha__fechar" type="button" data-fechar aria-label="Fechar ficha">&times;</button>
+
+      <div class="ficha__arte" id="fichaArte"></div>
+
+      <div class="ficha__texto">
+        <p class="etiqueta" id="fichaUniverso"></p>
+        <h3 class="ficha__nome" id="fichaNome"></h3>
+        <p class="ficha__identidade" id="fichaIdentidade"></p>
+
+        <div class="ficha__bloco">
+          <h4>Origem</h4>
+          <p id="fichaOrigem"></p>
+        </div>
+
+        <div class="ficha__bloco">
+          <h4>Poderes</h4>
+          <ul class="tags" id="fichaPoderes"></ul>
+        </div>
+
+        <dl class="ficha__dados">
+          <div><dt>Primeira aparição</dt><dd id="fichaEstreia"></dd></div>
+          <div><dt>Base de operações</dt><dd id="fichaBase"></dd></div>
+          <div><dt>Equipe</dt><dd id="fichaEquipe"></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
